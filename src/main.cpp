@@ -97,12 +97,12 @@ int main()
     InitializeSDL();
 
 
-    Shader ourShader("./shaders/vert.glsl","./shaders/frag.glsl");
+    Shader ourShader("../../shaders/vert.glsl","../../shaders/frag.glsl");
     SpriteRenderer renderer(ourShader, gScreenWidth, gScreenHeight);
 
-    Sprite ourSprite("./wall.jpg");
-    Sprite ourSprite2("./minecraft.png");
-    Sprite girlyPop("./girlypop.png");
+    Sprite ourSprite("../../wall.jpg");
+    Sprite ourSprite2("../../minecraft.png");
+    Sprite girlyPop("../../girlypop.png");
 
     while (!gQuit)
     {
