@@ -15,11 +15,10 @@ cd vcpkg
 ```
 
 3. Install SDL2 and GLM using vcpkg:
-    - open command prompt
-    - type:
-    ```bash
-    vcpkg install sdl2 glm
-    ```
+```bash
+vcpkg install sdl2 glm
+```
+
 ### After installing dependencies, proceed with following:
 
 1. Clone the repo:
