@@ -5,9 +5,16 @@ Visual Novel Engine written in OpenGL with C/C++
 
 ### Before you start, you need to install some dependencies:
 
-- Install latest version of [CMake](https://cmake.org/download/)
+1. Install latest version of [CMake](https://cmake.org/download/)
 
-- Install SDL2 and GLM using vcpkg:
+2. Install vcpkg
+```bash
+git clone https://github.com/microsoft/vcpkg.git
+cd vcpkg
+.\bootstrap-vcpkg.bat
+```
+
+3. Install SDL2 and GLM using vcpkg:
     - open command prompt
     - type:
     ```bash
