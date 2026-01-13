@@ -7,7 +7,7 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
-#include "Sprite.hpp"
+#include "sprite.h"
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <Shader.hpp>
@@ -36,7 +36,7 @@ class SpriteRenderer
 
       // Texture binding
       glActiveTexture(GL_TEXTURE0);
-      glBindTexture(GL_TEXTURE_2D, sprite.texture);
+      glBindTexture(GL_TEXTURE_2D, sprite.textureID);
 
 
       // Model matrix
