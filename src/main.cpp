@@ -17,11 +17,14 @@
 #include "loader.hpp"
 
 // Globals
-int gScreenWidth = 640;
-int gScreenHeight = 480;
+int gScreenWidth = 1280;
+int gScreenHeight = 720;
 SDL_Window* gGraphicsApplicationWindow = nullptr;
 SDL_GLContext gOpenGLContext = nullptr;
 bool gQuit = false; // If true we quit
+
+float leftRight = 0;
+float upDown = 0;
 
 float deltaTime = 0;
 float lastFrame = 0;
@@ -33,6 +36,7 @@ void GetOpenGLVersionInfo()
     std::cout << "Version: " << glGetString(GL_VERSION) << std::endl;
     std::cout << "Shading Language: " << glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
 }
+
 
 void InitializeSDL()
 {
@@ -91,8 +95,10 @@ void Input()
     }
 
     const Uint8* state = SDL_GetKeyboardState(NULL);
-    //if (state[SDL_SCANCODE_A]) direction.x -= 1.0f;
-    //if (state[SDL_SCANCODE_D]) direction.x += 1.0f;
+    if (state[SDL_SCANCODE_A]) leftRight -= 1.0f;
+    if (state[SDL_SCANCODE_D]) leftRight += 1.0f;
+    if (state[SDL_SCANCODE_W]) upDown += 1.0f;
+    if (state[SDL_SCANCODE_S]) upDown -= 1.0f;
 }
 
 int main()
@@ -102,8 +108,8 @@ int main()
 
     Shader ourShader("./shaders/vert.glsl","./shaders/frag.glsl");
     Sprite wall;
-    wall.posX = 0;
-    wall.posY = 0;
+    wall.posX = 2;
+    wall.posY = 2;
     loadImage(wall, "./wall.jpg");
 
     Sprite minecraft;
@@ -113,6 +119,8 @@ int main()
 
     Sprite girlyPop;
     loadImage(girlyPop, "./girlypop.png");
+    leftRight = 630;
+    upDown = 361;
 
     SpriteRenderer renderer(ourShader, gScreenWidth, gScreenHeight);
 
@@ -126,7 +134,6 @@ int main()
       lastFrame = currentFrame;
 
       Input();
-
       glDisable(GL_DEPTH_TEST);
       glDisable(GL_CULL_FACE);
       glViewport(0, 0, gScreenWidth, gScreenHeight);
@@ -134,10 +141,12 @@ int main()
       glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
       // Magic happens here
-      renderer.draw(wall, glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f), 0.0f, glm::vec3(1.0f));
-      renderer.draw(minecraft, glm::vec2(40.0f, 40.0f), glm::vec2(1.0f, 1.0f), 0.0f, glm::vec3(1.0f));
-      renderer.draw(girlyPop, glm::vec2(100.0f, 100.0f), glm::vec2(1.0f, 1.0f), 0.0f, glm::vec3(1.0f));
-
+//      renderer.draw(wall);
+      girlyPop.posX = leftRight;
+      girlyPop.posY = upDown;
+      std::cout << "X: " << leftRight << std::endl;
+      std::cout << "Y: " << upDown << std::endl;
+      renderer.draw(girlyPop);
     
       //
 
