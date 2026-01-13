@@ -5,13 +5,16 @@
 #include <vector>
 #include <string>
 #include <fstream>
-#include "SpriteRenderer.hpp"
-#include "Sprite.hpp"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/string_cast.hpp>
+
+// Personal libraries
+#include "SpriteRenderer.hpp"
+#include "sprite.h"
+#include "loader.hpp"
 
 // Globals
 int gScreenWidth = 640;
@@ -98,11 +101,23 @@ int main()
 
 
     Shader ourShader("./shaders/vert.glsl","./shaders/frag.glsl");
+    Sprite wall;
+    wall.posX = 0;
+    wall.posY = 0;
+    loadImage(wall, "./wall.jpg");
+
+    Sprite minecraft;
+    minecraft.posX = 1;
+    minecraft.posY = 1;
+    loadImage(minecraft, "./minecraft.png");
+
+    Sprite girlyPop;
+    loadImage(girlyPop, "./girlypop.png");
+
     SpriteRenderer renderer(ourShader, gScreenWidth, gScreenHeight);
 
-    Sprite ourSprite("./wall.jpg");
-    Sprite ourSprite2("./minecraft.png");
-    Sprite girlyPop("./girlypop.png");
+    //Sprite ourSprite2("./minecraft.png");
+    //Sprite girlyPop("./girlypop.png");
 
     while (!gQuit)
     {
@@ -119,11 +134,9 @@ int main()
       glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
       // Magic happens here
-      renderer.draw(ourSprite, glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f), 0.0f, glm::vec3(1.0f));
-
-      renderer.draw(ourSprite2, glm::vec2(1.0f, 1.0f), glm::vec2(0.5f, 0.5f), 0.0f, glm::vec3(1.0f));
-
-      renderer.draw(girlyPop, glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f), 0.0f, glm::vec3(1.0f));
+      renderer.draw(wall, glm::vec2(0.0f, 0.0f), glm::vec2(1.0f, 1.0f), 0.0f, glm::vec3(1.0f));
+      renderer.draw(minecraft, glm::vec2(40.0f, 40.0f), glm::vec2(1.0f, 1.0f), 0.0f, glm::vec3(1.0f));
+      renderer.draw(girlyPop, glm::vec2(100.0f, 100.0f), glm::vec2(1.0f, 1.0f), 0.0f, glm::vec3(1.0f));
 
     
       //
