@@ -28,7 +28,7 @@ class SpriteRenderer
 
     // Called every frame
     // TODO reduce the complexity of the function call by passing only floats
-    void draw(Sprite& sprite, glm::vec2 position, glm::vec2 scale, float rotation, glm::vec3 color = glm::vec3(1.0f))
+    void draw(Sprite& sprite)
     {
       shader.use();
 
@@ -38,18 +38,17 @@ class SpriteRenderer
       glActiveTexture(GL_TEXTURE0);
       glBindTexture(GL_TEXTURE_2D, sprite.textureID);
 
-
       // Model matrix
       glm::mat4 model = glm::mat4(1.0f);
-      model = glm::scale(model, glm::vec3(scale.x, scale.y, 1.0f));
-      model = glm::translate(model, glm::vec3(position, 0.0f));
-      model = glm::rotate(model, rotation, glm::vec3(0.0f, 0.0f, 1.0f));
+      model = glm::translate(model, glm::vec3(sprite.posX, sprite.posY, 0.0f));
+      model = glm::scale(model, glm::vec3(sprite.width, sprite.height, 1.0f));
+//      model = glm::rotate(model, rotation, glm::vec3(0.0f, 0.0f, 1.0f));
       shader.uniformMatrix4("model", model);
 
       // Orthogonal projection matrix
       glm::mat4 projection = glm::mat4(1.0f);
       float aspect = (float)screenWidth / (float)screenHeight;
-      projection = glm::ortho(0.0f, (float)screenWidth*aspect, 0.0f, (float)screenHeight, -0.1f, 0.1f);
+      projection = glm::ortho(0.0f, (float)screenWidth, 0.0f, (float)screenHeight, -0.1f, 0.1f);
       shader.uniformMatrix4("projection", projection);
 
       // Draw call
@@ -68,10 +67,10 @@ class SpriteRenderer
     void vertexSpecification()
     {
       const std::vector<GLfloat> vertexPosition{
-        0.25f * screenWidth,  0.75f * screenHeight,  0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, // top left
-         0.75f * screenWidth,  0.75f * screenHeight,  0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, // top right
-        0.25f * screenWidth, 0.25f * screenHeight,  0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom left
-         0.75f * screenWidth, 0.25f * screenHeight,  0.0f, 0.5f, 1.0f, 0.8f, 1.0f, 0.0f  // bottom right
+        -0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, // top left
+         0.5f,  0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, // top right
+        -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom left
+         0.5f, -0.5f, 0.0f, 0.5f, 1.0f, 0.8f, 1.0f, 0.0f  // bottom right
       };
 
       const std::vector<GLint> indices{ 
