@@ -12,7 +12,7 @@
 #include <glm/gtx/string_cast.hpp>
 
 // Personal libraries
-#include "SpriteRenderer.hpp"
+#include "spriterenderer.hpp"
 #include "sprite.h"
 #include "loader.hpp"
 
@@ -22,6 +22,9 @@ int gScreenHeight = 720;
 SDL_Window* gGraphicsApplicationWindow = nullptr;
 SDL_GLContext gOpenGLContext = nullptr;
 bool gQuit = false; // If true we quit
+GLuint VAO = 0;
+GLuint VBO = 0;
+GLuint EBO = 0;
 
 float leftRight = 0;
 float upDown = 0;
@@ -122,7 +125,7 @@ int main()
     leftRight = 630;
     upDown = 361;
 
-    SpriteRenderer renderer(ourShader, gScreenWidth, gScreenHeight);
+    loadVertices(VAO, VBO, EBO);
 
     //Sprite ourSprite2("./minecraft.png");
     //Sprite girlyPop("./girlypop.png");
@@ -142,11 +145,12 @@ int main()
 
       // Magic happens here
 //      renderer.draw(wall);
-      girlyPop.posX = leftRight;
-      girlyPop.posY = upDown;
+      minecraft.posX = leftRight;
+      minecraft.posY = upDown;
       std::cout << "X: " << leftRight << std::endl;
       std::cout << "Y: " << upDown << std::endl;
-      renderer.draw(girlyPop);
+//      renderer.draw(girlyPop);
+      draw(minecraft, VAO, ourShader);
     
       //
 
