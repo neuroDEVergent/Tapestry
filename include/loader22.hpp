@@ -1,7 +1,7 @@
 #ifndef LOADER_HPP
 #define LOADER_HPP
 
-#include "sprite22.h"
+#include "sprite.h"
 #include <string>
 #include <iostream>
 #include <glad/glad.h>

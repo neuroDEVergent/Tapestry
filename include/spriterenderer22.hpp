@@ -5,7 +5,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include "Shader22.hpp"
-#include "sprite22.h"
+#include "sprite.h"
 
 void draw(Sprite& sprite, GLuint& VAO, Shader& shader);
 
