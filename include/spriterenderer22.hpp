@@ -4,8 +4,8 @@
 #include <glad/glad.h>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
-#include "Shader.hpp"
-#include "sprite.h"
+#include "Shader22.hpp"
+#include "sprite22.h"
 
 void draw(Sprite& sprite, GLuint& VAO, Shader& shader);
 
