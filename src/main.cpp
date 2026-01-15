@@ -13,8 +13,8 @@
 
 // Personal libraries
 #include "spriterenderer22.hpp"
-#include "sprite22.h"
 #include "loader22.hpp"
+#include "sprite.h"
 #include "window.h"
 
 // Globals
@@ -37,18 +37,12 @@ int main()
     }
 
     Shader ourShader("./shaders/vert.glsl","./shaders/frag.glsl");
-    Sprite wall;
-    wall.posX = 2;
-    wall.posY = 2;
-    loadImage(wall, "./wall.jpg");
+    
+    Sprite minecraft = {0};
+    minecraft.posX = 2;
+    minecraft.posY = 2;
+    loadImageAsTexture(&minecraft, "./minecraft.png");
 
-    Sprite minecraft;
-    minecraft.posX = 1;
-    minecraft.posY = 1;
-    loadImage(minecraft, "./minecraft.png");
-
-    Sprite girlyPop;
-    loadImage(girlyPop, "./girlypop.png");
     leftRight = 630;
     upDown = 361;
 

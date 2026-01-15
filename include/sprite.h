@@ -3,7 +3,7 @@
 
 #include <glad/glad.h>
 
-struct Sprite
+typedef struct 
 {
   GLuint textureID;
   int width;
@@ -12,6 +12,8 @@ struct Sprite
 
   float posX;
   float posY;
-};
+} Sprite;
+
+void loadImageAsTexture(Sprite* sprite, const char* filePath);
 
 #endif
