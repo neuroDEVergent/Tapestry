@@ -13,6 +13,7 @@
 
 // Personal libraries
 #include "spriterenderer22.hpp"
+#include "shader.h"
 #include "loader22.hpp"
 #include "sprite.h"
 #include "window.h"
@@ -36,12 +37,15 @@ int main()
       return 1;
     }
 
-    Shader ourShader("./shaders/vert.glsl","./shaders/frag.glsl");
+    GLuint ourShader = createGraphicsPipeline("./shaders/vert.glsl","./shaders/frag.glsl");
     
     Sprite minecraft = {0};
     minecraft.posX = 2;
     minecraft.posY = 2;
     loadImageAsTexture(&minecraft, "./minecraft.png");
+
+    Sprite girlyPop = {0};
+    loadImageAsTexture(&girlyPop, "./girlypop.png");
 
     leftRight = 630;
     upDown = 361;
@@ -66,10 +70,11 @@ int main()
 
       // Magic happens here
 //      renderer.draw(wall);
-      minecraft.posX = leftRight;
-      minecraft.posY = upDown;
+      girlyPop.posX = leftRight;
+      girlyPop.posY = upDown;
 //      renderer.draw(girlyPop);
-      draw(minecraft, VAO, ourShader);
+      draw(minecraft, VAO, &ourShader);
+      draw(girlyPop, VAO, &ourShader);
     
       //
 
