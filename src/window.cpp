@@ -103,9 +103,16 @@ void pollEvents(Window* window)
           window->quit = true;
         }
 
+      case SDL_MOUSEMOTION:
+        window->mouseAbsX = (float) e.motion.x;
+        window->mouseAbsY = (float) -e.motion.y + window->height;
+
+        window->mouseNormX = (float) e.motion.x / window->width;
+        window->mouseNormY = (float) -e.motion.y / window->height + 1;
        // TODO handle window resize event
-       // TODO handle input (delegate to input module)
     }
+
+
   
   }
 }

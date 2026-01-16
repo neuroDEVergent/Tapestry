@@ -27,6 +27,7 @@ void loadImageAsTexture(Sprite* sprite, const char* filePath)
    glGenerateMipmap(GL_TEXTURE_2D);
 
    printf("IMAGE LOADED\n");
+   printf("Channels: %d\n", sprite->channels);
    }
    else
    {
