@@ -15,6 +15,11 @@ typedef struct
 
   bool          vsync;
   bool          quit;
+
+  float         mouseAbsX;
+  float         mouseAbsY;
+  float         mouseNormX;
+  float         mouseNormY;
 } Window;
 
 // Creates window + OpenGL context

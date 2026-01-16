@@ -42,10 +42,14 @@ int main()
     Sprite minecraft = {0};
     minecraft.posX = 2;
     minecraft.posY = 2;
-    loadImageAsTexture(&minecraft, "./minecraft.png");
+    //loadImageAsTexture(&minecraft, "./minecraft.png");
 
     Sprite girlyPop = {0};
-    loadImageAsTexture(&girlyPop, "./girlypop.png");
+    //loadImageAsTexture(&girlyPop, "./girlypop.png");
+    //
+
+    Sprite obelisk = {0};
+    loadImageAsTexture(&obelisk, "./Sussy_Obelisk.png");
 
     leftRight = 630;
     upDown = 361;
@@ -58,23 +62,24 @@ int main()
     while (!win.quit)
     {
       pollEvents(&win);
-      float currentFrame = static_cast<float>(SDL_GetTicks()); 
-      deltaTime = (currentFrame - lastFrame) / 1000.0f;
+      float currentFrame = static_cast<float>(SDL_GetTicks()) / 1000.0f; 
+      deltaTime = (currentFrame - lastFrame);
       lastFrame = currentFrame;
 
       glDisable(GL_DEPTH_TEST);
       glDisable(GL_CULL_FACE);
+      glEnable(GL_BLEND);
+      glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
       glViewport(0, 0, win.width, win.height);
-      glClearColor(.03f, .05f, 0.27f, 1.f);
+      glClearColor(.00f, .00f, 0.00f, 1.f);
       glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
       // Magic happens here
 //      renderer.draw(wall);
-      girlyPop.posX = leftRight;
-      girlyPop.posY = upDown;
+      obelisk.posX = leftRight;
+      obelisk.posY = upDown;
 //      renderer.draw(girlyPop);
-      draw(minecraft, VAO, &ourShader);
-      draw(girlyPop, VAO, &ourShader);
+      draw(obelisk, VAO, &ourShader, &win, currentFrame);
     
       //
 

@@ -6,7 +6,8 @@
 #include <glm/gtc/type_ptr.hpp>
 #include "shader.h"
 #include "sprite.h"
+#include "window.h"
 
-void draw(Sprite& sprite, GLuint& VAO, GLuint* shader);
+void draw(Sprite& sprite, GLuint& VAO, GLuint* shader, Window* window, float time);
 
 #endif

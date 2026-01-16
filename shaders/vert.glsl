@@ -9,10 +9,13 @@ uniform mat4 model;
 
 out vec3 v_vertexColors;
 out vec2 v_TexCoords;
+out vec4 v_vertexPosition;
 
 void main()
 {
   v_vertexColors = vertexColors;
-  gl_Position = projection * model * vec4(position, 1.0f);
+  v_vertexPosition = projection * model * vec4(position, 1.0f);
   v_TexCoords = TexCoords;
+  gl_Position = v_vertexPosition;
+
 }
