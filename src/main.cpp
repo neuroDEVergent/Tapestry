@@ -12,7 +12,7 @@
 #include <glm/gtx/string_cast.hpp>
 
 // Personal libraries
-#include "spriterenderer22.hpp"
+#include "spriterenderer.h"
 #include "shader.h"
 #include "loader22.hpp"
 #include "sprite.h"
@@ -39,25 +39,22 @@ int main()
 
     GLuint ourShader = createGraphicsPipeline("./shaders/vert.glsl","./shaders/frag.glsl");
     
-    Sprite minecraft = {0};
-    minecraft.posX = 2;
-    minecraft.posY = 2;
-    //loadImageAsTexture(&minecraft, "./minecraft.png");
-
     Sprite girlyPop = {0};
     //loadImageAsTexture(&girlyPop, "./girlypop.png");
-    //
+
+    Sprite mount = {0};
+    loadImageAsTexture(&mount, "./assets/mount.png");
 
     Sprite obelisk = {0};
-    loadImageAsTexture(&obelisk, "./Sussy_Obelisk.png");
+//    loadImageAsTexture(&obelisk, "./Sussy_Obelisk.png");
+
+    Sprite pika = {0};
+//    loadImageAsTexture(&pika, "./pika.png");
 
     leftRight = 630;
     upDown = 361;
 
     loadVertices(VAO, VBO, EBO);
-
-    //Sprite ourSprite2("./minecraft.png");
-    //Sprite girlyPop("./girlypop.png");
 
     while (!win.quit)
     {
@@ -75,11 +72,9 @@ int main()
       glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
       // Magic happens here
-//      renderer.draw(wall);
-      obelisk.posX = leftRight;
-      obelisk.posY = upDown;
-//      renderer.draw(girlyPop);
-      draw(obelisk, VAO, &ourShader, &win, currentFrame);
+      mount.posX = leftRight;
+      mount.posY = upDown;
+      draw(mount, VAO, &ourShader, &win, currentFrame);
     
       //
 

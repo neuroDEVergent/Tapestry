@@ -4,27 +4,37 @@
  in vec2 v_TexCoords;
  in vec4 v_vertexPosition;
   
- vec2 center = vec2(0.5, 0.5);
-
- out vec4 color;
+ out vec4 FragColor;
 
  uniform vec2 mousePos;
  uniform float time;
  uniform sampler2D ourTexture;
+ uniform float imageWidth;
+ uniform float imageHeight;
 
  void main()
 {
-  vec2 uv = v_TexCoords;
 
-  float dist = distance(center, v_TexCoords);
-  float intensity = -distance(mousePos, center) + 1;
+  float w = 1.0 / imageWidth;
+  float h = 1.0 / imageHeight;
 
-  float glow = 0.1 / dist;
-  glow = clamp(glow, 0., 1.);
+  vec4 n[9];
 
-  vec3 glowColor = vec3(0.6, 0.2, 0.7);
+  n[0] = texture(ourTexture, v_TexCoords + vec2(-w,  -h));
+  n[1] = texture(ourTexture, v_TexCoords + vec2(0.0, -h));
+  n[2] = texture(ourTexture, v_TexCoords + vec2( w,  -h));
 
-  color = texture(ourTexture, v_TexCoords);
-  color += vec4(glowColor, 0.0f) *intensity * glow * 1.5;
+  n[3] = texture(ourTexture, v_TexCoords + vec2(-w, 0.0));
+  n[4] = texture(ourTexture, v_TexCoords);
+  n[5] = texture(ourTexture, v_TexCoords + vec2( w, 0.0));
 
+  n[6] = texture(ourTexture, v_TexCoords + vec2(-w,  h));
+  n[7] = texture(ourTexture, v_TexCoords + vec2(0.0, h));
+  n[8] = texture(ourTexture, v_TexCoords + vec2( w,  h));
+
+  vec4 sobel_edge_h = n[0] + (2.0*n[1]) + n[2] - (n[6] + (2.0*n[7]) + n[8]);
+  vec4 sobel_edge_v = n[2] + (2.0*n[5]) + n[8] - (n[0] + (2.0*n[3]) + n[6]);
+  vec4 sobel = sqrt((sobel_edge_h * sobel_edge_h) + (sobel_edge_v * sobel_edge_v));
+
+  FragColor = vec4(sobel.rgb, 1.0);
 }
