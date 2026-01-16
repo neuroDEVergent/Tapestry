@@ -40,10 +40,10 @@ int main()
     GLuint ourShader = createGraphicsPipeline("./shaders/vert.glsl","./shaders/frag.glsl");
     
     Sprite girlyPop = {0};
-    //loadImageAsTexture(&girlyPop, "./girlypop.png");
+    loadImageAsTexture(&girlyPop, "./assets/girlypop.png");
 
     Sprite mount = {0};
-    loadImageAsTexture(&mount, "./assets/mount.png");
+//    loadImageAsTexture(&mount, "./assets/mount.png");
 
     Sprite obelisk = {0};
 //    loadImageAsTexture(&obelisk, "./Sussy_Obelisk.png");
@@ -72,9 +72,9 @@ int main()
       glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
       // Magic happens here
-      mount.posX = leftRight;
-      mount.posY = upDown;
-      draw(mount, VAO, &ourShader, &win, currentFrame);
+      girlyPop.posX = leftRight;
+      girlyPop.posY = upDown;
+      draw(girlyPop, VAO, &ourShader, &win, currentFrame);
     
       //
 
